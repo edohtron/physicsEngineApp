@@ -12,7 +12,12 @@ Sphere::Sphere(glm::vec2 position, glm::vec2 velocity,
 	m_colour = colour;
 }
 
-bool Sphere::checkCollision(PhysicsObject * pOther) //override?
+void Sphere::makeGizmo()
+{
+	aie::Gizmos::add2DCircle(getPosition(), getRadius(), getMass(), getColour());
+}
+
+bool Sphere::checkCollision(PhysicsObject * pOther)
 {
 	return false;
 }

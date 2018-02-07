@@ -1,5 +1,6 @@
 #pragma once
 #include "Rigidbody.h"
+#include <Gizmos.h>
 
 class Sphere : public Rigidbody
 {
@@ -9,7 +10,7 @@ public:
 
 	~Sphere();
 
-	virtual void makeGizmo(); //define?
+	virtual void makeGizmo();
 	virtual bool checkCollision(PhysicsObject* pOther);
 
 	float getRadius() { return m_radius; }

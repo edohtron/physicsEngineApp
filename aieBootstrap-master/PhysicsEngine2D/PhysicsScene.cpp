@@ -52,15 +52,15 @@ void PhysicsScene::updateGizmos()
 	}
 }
 
-//void PhysicsScene::debugScene()
-//{
-//	int count = 0;
-//	for (auto pActor : m_actors) {
-//		std::cout << count << " : ";
-//		pActor->debug();
-//		count++;
-//	}
-//}
+void PhysicsScene::debugScene()
+{
+	int count = 0;
+	for (auto pActor : m_actors) {
+		std::cout << count << " : ";
+		pActor->debug();
+		count++;
+	}
+}
 
 /*
 Note that in future tutorials you will need to keep track of the previous and current position of each
@@ -75,4 +75,12 @@ PhysicsScene::~PhysicsScene()
 	{
 		delete pActor;
 	}
+}
+
+void PhysicsScene::addActor(PhysicsObject * actor)
+{
+}
+
+void PhysicsScene::removeActor(PhysicsObject * actor)
+{
 }

@@ -22,7 +22,7 @@ public:
 	void update(float dt); 
 	void updateGizmos(); 
 
-	//virtual void debugScene();
+	virtual void debugScene();
 
 	void setGravity(const glm::vec2 gravity) { m_gravity = gravity; } 
 	glm::vec2 getGravity() const { return m_gravity; } 
