@@ -8,7 +8,7 @@
 
 Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position,
 	glm::vec2 velocity, float rotation, float mass) :
-	PhysicsObject(SPHERE) // does not match physicsObject constructor
+	PhysicsObject(SPHERE)
 {
 
 }
@@ -30,8 +30,8 @@ void Rigidbody::applyForce(glm::vec2 force)
 
 void Rigidbody::applyForceToActor(Rigidbody * actor2, glm::vec2 force)
 {
-	actor2->applyForce(force);
 	this->applyForce(-force);
+	actor2->applyForce(force);
 }
 
 Rigidbody::~Rigidbody()
