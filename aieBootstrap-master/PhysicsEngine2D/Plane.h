@@ -4,7 +4,7 @@
 class Plane : public PhysicsObject
 {
 public:
-	//Plane();
+	Plane();
 	Plane(glm::vec2 normal, float distance);
 	~Plane();
 

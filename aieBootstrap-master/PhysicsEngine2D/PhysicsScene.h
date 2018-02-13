@@ -7,9 +7,19 @@
 #include <iostream>
 #include <algorithm>
 #include "Sphere.h"
+#include "Plane.h"
 
 class PhysicsScene
 {
+public: //or private
+	struct CollisionData
+	{
+		bool		wasCollision;
+		glm::vec2	normal;
+		float		overlap;
+		glm::vec2	contactPoint;
+	};
+
 public:
 	PhysicsScene();
 	~PhysicsScene();
@@ -33,10 +43,16 @@ public:
 	static bool sphere2Plane(PhysicsObject*, PhysicsObject*);
 	static bool sphere2Sphere(PhysicsObject*, PhysicsObject*);
 
+	//static CollisionData plane2Plane(PhysicsObject*, PhysicsObject*);
+	//static CollisionData plane2Sphere(PhysicsObject*, PhysicsObject*);
+	//static CollisionData sphere2Plane(PhysicsObject*, PhysicsObject*); 
+	//static CollisionData sphere2Sphere(PhysicsObject*, PhysicsObject*); 
 
 protected: 
 	glm::vec2 m_gravity; 
 	float m_timeStep; 
 	std::vector<PhysicsObject*> m_actors;
+
+
 };
 

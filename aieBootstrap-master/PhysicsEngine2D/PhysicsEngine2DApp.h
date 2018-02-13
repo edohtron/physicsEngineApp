@@ -27,4 +27,7 @@ protected:
 	aie::Font*			m_font;
 	PhysicsScene*		m_physicsScene;
 
+	Sphere* ball1;
+	Sphere* ball2;
+
 };

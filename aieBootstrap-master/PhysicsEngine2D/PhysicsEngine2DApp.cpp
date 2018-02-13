@@ -20,13 +20,13 @@ bool PhysicsEngine2DApp::startup() {
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
 	m_physicsScene = new PhysicsScene();
-	m_physicsScene->setGravity(glm::vec2(0, 0));
+	m_physicsScene->setGravity(glm::vec2(0, -10));
 	m_physicsScene->setTimeStep(0.01f);
 	
 
 
 	//WEEK 1 EXERCISE TESTING
-	/*
+	
 	//SIMULATING ROCKET MOTOR
 	//Sphere* rocket = new Sphere(glm::vec2(0, 0), glm::vec2(0, 0), 5.0f, 10, glm::vec4(1, 0, 0, 1));
 	//m_physicsScene->addActor(rocket);
@@ -38,19 +38,19 @@ bool PhysicsEngine2DApp::startup() {
 	//m_physicsScene->addActor(ball);
 	
 	//#2
-	//Sphere* ball1 = new Sphere(glm::vec2(20, 20), glm::vec2(0, 0), 4.0f, 6, glm::vec4(1, 0, 0, 1));
-	//Sphere* ball2 = new Sphere(glm::vec2(40, 20), glm::vec2(0, 0), 20.0f, 6, glm::vec4(0, 1, 0, 1));
+	Sphere* ball1 = new Sphere(glm::vec2(-20, 20), glm::vec2(0, 0), 4.0f, 5, glm::vec4(1, 0, 0, 1));
+	Sphere* ball2 = new Sphere(glm::vec2(40, 20), glm::vec2(0, 0), 4.0f, 5, glm::vec4(0, 1, 0, 1));
+	Plane* plane1 = new Plane(glm::vec2(0, 1), -50);
 
 	//SIMULATE COLLISION
-	//m_physicsScene->addActor(ball1);
-	//m_physicsScene->addActor(ball2);
+	m_physicsScene->addActor(ball1);
+	m_physicsScene->addActor(ball2);
+	m_physicsScene->addActor(plane1);
 
-	//ball1->applyForce(glm::vec2(-30, 0));
-	//ball2->applyForce(glm::vec2(30, 0));
-	//ball1->applyForceToActor(ball2, glm::vec2(15, 0));
-	*/
-
-
+	//ball1->applyForce(glm::vec2(50, 0));
+	//ball2->applyForce(glm::vec2(-50, 0));
+	
+	
 	return true;
 }
 
@@ -73,6 +73,8 @@ void PhysicsEngine2DApp::update(float deltaTime) {
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
+
+
 }
 
 void PhysicsEngine2DApp::draw() {
