@@ -80,7 +80,7 @@ void PhysicsScene::update(float dt)
 	//		}
 	//	}
 	//}
-	//dirty.clear();
+	//dirty.clear(); 
 }
 
 void PhysicsScene::updateGizmos()
@@ -151,7 +151,8 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 		float intersection = sphere->getRadius() - sphereToPlane;
 		if (intersection > 0)
 		{
-			sphere->setVelocity(glm::vec2(0, 0));
+			//sphere->setVelocity(glm::vec2(0, 0));
+			plane->resolveCollision(sphere);
 
 			return true;
 		}
@@ -174,8 +175,8 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 
 		if (glm::length(dist) < sphere1->getRadius() + sphere2->getRadius())
 		{
-			sphere1->setVelocity(glm::vec2(0, 0));
-			sphere2->setVelocity(glm::vec2(0, 0));
+			sphere1->resolveCollision(sphere2);
+			//sphere2->setVelocity(glm::vec2(0, 0));
 			return true;
 		}
 	}

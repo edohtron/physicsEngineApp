@@ -16,9 +16,6 @@ Plane::Plane(glm::vec2 normal, float distance)
 	makeGizmo();
 }
 
-Plane::~Plane()
-{
-}
 
 void Plane::fixedUpdate(glm::vec2 gravity, float timeStep)
 {
@@ -38,5 +35,30 @@ void Plane::makeGizmo()
 }
 
 void Plane::resetPosition()
+{
+}
+
+void Plane::resolveCollision(Rigidbody * actor2)
+{
+	//APPLY calculated impulse to sphere
+	//RELATIVE velocities of sphere,
+	//COLLISION normal is planes normal
+	//coefficient of elasticity
+
+
+	glm::vec2 relativeVelocity = actor2->getVelocity();
+	float elasticity = 1;
+
+	//impulse to sphere
+	float j = glm::dot(relativeVelocity , m_normal);
+
+	glm::vec2 newVelocity = actor2->getVelocity() - (1 + elasticity) * j * m_normal;
+
+	actor2->setVelocity(newVelocity);
+	
+
+}
+
+Plane::~Plane()
 {
 }
