@@ -38,14 +38,19 @@ void Plane::resetPosition()
 {
 }
 
-void Plane::resolveCollision(Rigidbody * actor2)
+void Plane::resolveCollision(Rigidbody * actor2, glm::vec2 contact)
 {
-	//APPLY calculated impulse to sphere
-	//RELATIVE velocities of sphere,
-	//COLLISION normal is planes normal
-	//coefficient of elasticity
+	// plane not moving, relative velocity is actors2's velocity
+	glm::vec2 vRel = actor2->getVelocity();
+	float e = actor2->getElasticity();
+	float j = glm::dot(-(1 + e) * (vRel), m_normal) / (1 / actor2->getMass());
+
+	glm::vec2 force = m_normal * j;
+
+	actor2->applyForce(force, contact - actor2->getPosition());
 
 
+	/* OLD 
 	glm::vec2 relativeVelocity = actor2->getVelocity();
 	float elasticity = 1;
 
@@ -55,6 +60,7 @@ void Plane::resolveCollision(Rigidbody * actor2)
 	glm::vec2 newVelocity = actor2->getVelocity() - (1 + elasticity) * j * m_normal;
 
 	actor2->setVelocity(newVelocity);
+	*/
 	
 
 }

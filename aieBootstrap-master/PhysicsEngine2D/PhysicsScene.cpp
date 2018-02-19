@@ -151,8 +151,7 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 		float intersection = sphere->getRadius() - sphereToPlane;
 		if (intersection > 0)
 		{
-			//sphere->setVelocity(glm::vec2(0, 0));
-			plane->resolveCollision(sphere);
+			plane->resolveCollision(sphere, glm::vec2(0 , 0));
 
 			return true;
 		}
@@ -175,8 +174,9 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 
 		if (glm::length(dist) < sphere1->getRadius() + sphere2->getRadius())
 		{
-			sphere1->resolveCollision(sphere2);
-			//sphere2->setVelocity(glm::vec2(0, 0));
+			sphere1->resolveCollision(sphere2, 0.5f * (sphere1->getPosition() + 
+														sphere2->getPosition()));
+
 			return true;
 		}
 	}

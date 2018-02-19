@@ -1,6 +1,7 @@
 #pragma once
 #include "PhysicsObject.h"
 
+
 class Rigidbody : public PhysicsObject {
 
 public:
@@ -11,11 +12,11 @@ public:
 
 	virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
 	virtual void debug()override; //define?
-	void applyForce(glm::vec2 force);
-	void applyForceToActor(Rigidbody* actor2, glm::vec2 force);
+	void applyForce(glm::vec2 force, glm::vec2 pos);
+	//void applyForceToActor(Rigidbody* actor2, glm::vec2 force);
 	void setVelocity(glm::vec2 vel);
 
-	void resolveCollision(Rigidbody * actor2);
+	void resolveCollision(Rigidbody * actor2, glm::vec2 contact, glm::vec2* collisionNormal = nullptr);
 
 	virtual bool checkCollision(PhysicsObject* pOther) = 0; //define?
 
@@ -23,6 +24,8 @@ public:
 	float getRotation() { return m_rotation; }
 	glm::vec2 getVelocity() { return m_velocity; }
 	float getMass() { return m_mass; }
+	
+	float getElasticity() {	return m_elasticity; }
 
 
 protected:
@@ -31,6 +34,12 @@ protected:
 	float m_mass;
 	float m_rotation;
 
+	float m_linearDrag = 0.3f;
+	float m_angularDrag = 0.3f;
+	float m_angularVelocity;
+
+	float m_elasticity;
+	float m_moment;
 
 };
 
