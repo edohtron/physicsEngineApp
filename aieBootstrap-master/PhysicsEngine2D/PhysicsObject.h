@@ -4,6 +4,8 @@
 enum ShapeType {
 	PLANE = 0,
 	SPHERE,
+	aabb,
+	//BOX,
 	SHAPE_COUNT
 };
 

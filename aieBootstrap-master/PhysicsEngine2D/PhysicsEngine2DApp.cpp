@@ -46,9 +46,9 @@ bool PhysicsEngine2DApp::startup() {
 	m_physicsScene->addActor(ball2);
 	m_physicsScene->addActor(plane1);
 
-	//ball1->applyForce(glm::vec2(-400, 0));
-	//ball2->applyForce(glm::vec2(0, 0));
-	
+	ball1->applyForce(glm::vec2(-400, 0));
+	ball2->applyForce(glm::vec2(400, 0));
+
 	
 	return true;
 }
