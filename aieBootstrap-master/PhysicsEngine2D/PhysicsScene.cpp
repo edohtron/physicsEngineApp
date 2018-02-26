@@ -4,9 +4,10 @@ typedef bool(*fn)(PhysicsObject*, PhysicsObject*);
 
 static fn collisionFunctionArray[] = 
 {
-	PhysicsScene::plane2Plane,	PhysicsScene::plane2Sphere,	 //PhysicsScene::plane2Box,
-	PhysicsScene::sphere2Plane, PhysicsScene::sphere2Sphere, //PhysicsScene::sphere2Box,
+	PhysicsScene::plane2Plane,	PhysicsScene::plane2Sphere,	 PhysicsScene::plane2AABB,
+	PhysicsScene::sphere2Plane, PhysicsScene::sphere2Sphere, PhysicsScene::sphere2AABB,
 	//PhysicsScene::box2Plane,	PhysicsScene::box2Sphere,	 PhysicsScene::box2Box,
+	PhysicsScene::aabb2Plane,	PhysicsScene::aabb2Sphere,	 PhysicsScene::aabb2AABB
 };
 
 void PhysicsScene::checkForCollision()
@@ -43,7 +44,6 @@ PhysicsScene::PhysicsScene()
 
 void PhysicsScene::update(float dt)
 {
-	static std::list<PhysicsObject*> dirty;
 
 	// update physics at a fixed time step 
 	static float accumulatedTime = 0.0f;
@@ -60,27 +60,6 @@ void PhysicsScene::update(float dt)
 	}
 
 	checkForCollision();
-
-	//for (auto pActor : m_actors) {
-	//	for (auto pOther : m_actors) {
-	//		if (pActor == pOther)
-	//			continue;
-	//
-	//		if (std::find(dirty.begin(), dirty.end(), pActor) != dirty.end() &&
-	//			std::find(dirty.begin(), dirty.end(), pOther) != dirty.end())
-	//			continue;
-	//
-	//		Rigidbody* pRigid = dynamic_cast<Rigidbody*>(pActor);
-	//		if (pRigid->checkCollision(pOther) == true) {
-	//			pRigid->applyForceToActor(
-	//				dynamic_cast<Rigidbody*>(pOther),
-	//				pRigid->getVelocity() * pRigid->getMass());
-	//			dirty.push_back(pRigid);
-	//			dirty.push_back(pOther);
-	//		}
-	//	}
-	//}
-	//dirty.clear(); 
 }
 
 void PhysicsScene::updateGizmos()
@@ -124,6 +103,11 @@ bool PhysicsScene::plane2Plane(PhysicsObject *, PhysicsObject *)
 }
 
 bool PhysicsScene::plane2Sphere(PhysicsObject *, PhysicsObject *)
+{
+	return false;
+}
+
+bool PhysicsScene::plane2AABB(PhysicsObject *, PhysicsObject *)
 {
 	return false;
 }
@@ -180,6 +164,38 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 			return true;
 		}
 	}
+	return false;
+}
+
+bool PhysicsScene::sphere2AABB(PhysicsObject *, PhysicsObject *)
+{
+	return false;
+}
+
+bool PhysicsScene::aabb2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
+{
+	AABB *aabb = dynamic_cast<AABB*>(obj1);
+	Plane *plane = dynamic_cast<Plane*>(obj2);
+
+	//if (aabb != nullptr && plane != nullptr)
+	//{
+	//	int numContacts = 0;
+	//	glm::vec2 contact(0, 0);
+	//	float contactV = 0;
+	//	float radius = 0.5f * std::fminf(aabb->getWidth)
+	//
+	//}
+
+	return false;
+}
+
+bool PhysicsScene::aabb2Sphere(PhysicsObject *, PhysicsObject *)
+{
+	return false;
+}
+
+bool PhysicsScene::aabb2AABB(PhysicsObject *, PhysicsObject *)
+{
 	return false;
 }
 

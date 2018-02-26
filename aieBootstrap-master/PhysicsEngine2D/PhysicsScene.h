@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "Sphere.h"
 #include "Plane.h"
+#include "AABB.h"
 
 class PhysicsScene
 {
@@ -38,10 +39,18 @@ public:
 
 	void checkForCollision();
 
+	//plane
 	static bool plane2Plane(PhysicsObject*, PhysicsObject*);
 	static bool plane2Sphere(PhysicsObject*, PhysicsObject*);
+	static bool plane2AABB(PhysicsObject*, PhysicsObject*);
+	//sphere
 	static bool sphere2Plane(PhysicsObject*, PhysicsObject*);
 	static bool sphere2Sphere(PhysicsObject*, PhysicsObject*);
+	static bool sphere2AABB(PhysicsObject*, PhysicsObject*);
+	//aabb
+	static bool aabb2Plane(PhysicsObject*, PhysicsObject*);
+	static bool aabb2Sphere(PhysicsObject*, PhysicsObject*);
+	static bool aabb2AABB(PhysicsObject*, PhysicsObject*);
 
 	//static CollisionData plane2Plane(PhysicsObject*, PhysicsObject*);
 	//static CollisionData plane2Sphere(PhysicsObject*, PhysicsObject*);

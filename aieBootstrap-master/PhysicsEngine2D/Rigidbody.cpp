@@ -8,7 +8,7 @@
 
 Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position,
 	glm::vec2 velocity, float rotation, float mass) :
-	PhysicsObject(SPHERE)
+	PhysicsObject(shapeID)
 {
 
 }
