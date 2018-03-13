@@ -209,8 +209,22 @@ bool PhysicsScene::aabb2Sphere(PhysicsObject *, PhysicsObject *)
 	return false;
 }
 
-bool PhysicsScene::aabb2AABB(PhysicsObject *, PhysicsObject *)
+bool PhysicsScene::aabb2AABB(PhysicsObject* obj1, PhysicsObject* obj2)
 {
+	AABB *aabb1 = dynamic_cast<AABB*>(obj1);
+	AABB *aabb2 = dynamic_cast<AABB*>(obj2);
+
+	if (aabb1 != nullptr && aabb2 != nullptr)
+	{
+
+		bool isNoCollision = aabb1->max().x < aabb2->min().x || aabb2->max().x < aabb1->min().x ||
+							 aabb1->max().y < aabb2->min().y || aabb2->max().y < aabb1->min().y;
+
+		if (!isNoCollision)
+		{
+			aabb1->resolveCollision(aabb2);
+		}
+	}
 
 	return false;
 }

@@ -27,6 +27,7 @@ bool PhysicsEngine2DApp::startup() {
 	Sphere* ball1 = new Sphere(glm::vec2(50, 7), glm::vec2(0, 0), 17.0f, 5, glm::vec4(1, 0, 0, 1));
 	Sphere* ball2 = new Sphere(glm::vec2(-25, 0), glm::vec2(0, 0), 16.0f, 5, glm::vec4(0, 1, 0, 1));
 	AABB*	sq1 = new AABB(glm::vec2(0, 0), glm::vec2(0, 0), 5.0f, glm::vec2(5, 5), glm::vec4(1, 0, 0, 1));
+	AABB*	sq2 = new AABB(glm::vec2(0, 35), glm::vec2(0, 0), 6.0f, glm::vec2(9, 9), glm::vec4(0, 1, 0, 1));
 	Plane* plane1 = new Plane(glm::vec2(0, 1), -50); //bottom plane
 	Plane* plane2 = new Plane(glm::vec2(1, 0), -95); //left plane
 	Plane* plane3 = new Plane(glm::vec2(0, -1), -50); //top plane
@@ -34,6 +35,7 @@ bool PhysicsEngine2DApp::startup() {
 
 	//SIMULATE COLLISION
 	m_physicsScene->addActor(sq1);
+	m_physicsScene->addActor(sq2);
 	m_physicsScene->addActor(ball1);
 	m_physicsScene->addActor(ball2);
 	m_physicsScene->addActor(plane1);
@@ -41,7 +43,7 @@ bool PhysicsEngine2DApp::startup() {
 	m_physicsScene->addActor(plane3);
 	m_physicsScene->addActor(plane4);
 
-
+	sq2->applyForce(glm::vec2(0, 0));
 	sq1->applyForce(glm::vec2(-150, 500));
 	ball1->applyForce(glm::vec2(-400, 0));
 	ball2->applyForce(glm::vec2(400, 0));
