@@ -121,6 +121,7 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 	if (sphere != nullptr && plane != nullptr)
 	{
 		glm::vec2 collisionNormal = plane->getNormal();
+
 		float sphereToPlane = glm::dot(
 			sphere->getPosition(),
 			plane->getNormal()) - plane->getDistance();
@@ -135,9 +136,7 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 		float intersection = sphere->getRadius() - sphereToPlane;
 		if (intersection > 0)
 		{
-			//sphere->setVelocity(glm::vec2(0, 0));
 			plane->resolveCollision(sphere);
-
 			return true;
 		}
 	}
@@ -177,14 +176,48 @@ bool PhysicsScene::aabb2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 	AABB *aabb = dynamic_cast<AABB*>(obj1);
 	Plane *plane = dynamic_cast<Plane*>(obj2);
 
-	//if (aabb != nullptr && plane != nullptr)
-	//{
-	//	int numContacts = 0;
-	//	glm::vec2 contact(0, 0);
-	//	float contactV = 0;
-	//	float radius = 0.5f * std::fminf(aabb->getWidth)
-	//
-	//}
+	if (aabb != nullptr && plane != nullptr)
+	{
+		glm::vec2 collisionNormal = plane->getNormal();
+		glm::vec2 planeOrigin = plane->getNormal() * plane->getDistance();
+
+		// get dist from plane
+		float distToPlane = glm::dot(
+			aabb->getPosition(),
+			plane->getNormal()) - plane->getDistance();
+
+
+		// get min/max of aabb
+		glm::vec2 aabbMin = aabb->min();
+		glm::vec2 aabbMax = aabb->max();
+
+		// dot product of min/max
+		float minPoint = glm::dot(aabbMin, plane->getNormal());
+		float maxPoint = glm::dot(aabbMax, plane->getNormal());
+
+		// find overlap
+		float overlap1 = minPoint - plane->getDistance();
+		float overlap2 = maxPoint - plane->getDistance();
+
+		float getOverlap;
+		if (overlap1 > overlap2)
+		{
+			getOverlap = overlap2;
+		}
+		else getOverlap = overlap1;
+
+		if (getOverlap < 0)
+		{
+			std::cout << "collision here" << std::endl;
+			plane->resolveCollision(aabb);
+		}
+
+		float bug = 0;
+
+
+	}
+
+
 
 	return false;
 }

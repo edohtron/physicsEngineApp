@@ -14,10 +14,6 @@ AABB::AABB(glm::vec2 position, glm::vec2 velocity,
 	makeGizmo();
 }
 
-AABB::~AABB()
-{
-}
-
 void AABB::makeGizmo()
 {
 	aie::Gizmos::add2DAABBFilled(m_position, m_extents, m_colour);
@@ -26,4 +22,8 @@ void AABB::makeGizmo()
 bool AABB::checkCollision(PhysicsObject * pOther)
 {
 	return false;
+}
+
+AABB::~AABB()
+{
 }

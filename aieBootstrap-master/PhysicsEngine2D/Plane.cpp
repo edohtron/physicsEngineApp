@@ -44,8 +44,7 @@ void Plane::resolveCollision(Rigidbody * actor2)
 	//RELATIVE velocities of sphere,
 	//COLLISION normal is planes normal
 	//coefficient of elasticity
-
-
+	
 	glm::vec2 relativeVelocity = actor2->getVelocity();
 	float elasticity = 1;
 
