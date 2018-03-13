@@ -145,7 +145,6 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 
 bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 {
-
 	//try to cast objects to sphere and sphere
 	Sphere *sphere1 = dynamic_cast<Sphere*>(obj1);
 	Sphere *sphere2 = dynamic_cast<Sphere*>(obj2);
@@ -159,7 +158,6 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 		if (glm::length(dist) < sphere1->getRadius() + sphere2->getRadius())
 		{
 			sphere1->resolveCollision(sphere2);
-			//sphere2->setVelocity(glm::vec2(0, 0));
 			return true;
 		}
 	}
@@ -178,15 +176,6 @@ bool PhysicsScene::aabb2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 
 	if (aabb != nullptr && plane != nullptr)
 	{
-		glm::vec2 collisionNormal = plane->getNormal();
-		glm::vec2 planeOrigin = plane->getNormal() * plane->getDistance();
-
-		// get dist from plane
-		float distToPlane = glm::dot(
-			aabb->getPosition(),
-			plane->getNormal()) - plane->getDistance();
-
-
 		// get min/max of aabb
 		glm::vec2 aabbMin = aabb->min();
 		glm::vec2 aabbMax = aabb->max();
@@ -208,16 +197,9 @@ bool PhysicsScene::aabb2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 
 		if (getOverlap < 0)
 		{
-			std::cout << "collision here" << std::endl;
 			plane->resolveCollision(aabb);
 		}
-
-		float bug = 0;
-
-
 	}
-
-
 
 	return false;
 }
@@ -229,6 +211,7 @@ bool PhysicsScene::aabb2Sphere(PhysicsObject *, PhysicsObject *)
 
 bool PhysicsScene::aabb2AABB(PhysicsObject *, PhysicsObject *)
 {
+
 	return false;
 }
 
