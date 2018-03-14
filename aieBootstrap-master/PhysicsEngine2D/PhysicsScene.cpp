@@ -102,14 +102,14 @@ bool PhysicsScene::plane2Plane(PhysicsObject *, PhysicsObject *)
 	return false;
 }
 
-bool PhysicsScene::plane2Sphere(PhysicsObject *, PhysicsObject *)
+bool PhysicsScene::plane2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 {
-	return false;
+	return sphere2Plane(obj2, obj1);
 }
 
-bool PhysicsScene::plane2AABB(PhysicsObject *, PhysicsObject *)
+bool PhysicsScene::plane2AABB(PhysicsObject* obj1, PhysicsObject* obj2)
 {
-	return false;
+	return aabb2Plane(obj2, obj1);
 }
 
 bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
@@ -164,8 +164,27 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
 	return false;
 }
 
-bool PhysicsScene::sphere2AABB(PhysicsObject *, PhysicsObject *)
+bool PhysicsScene::sphere2AABB(PhysicsObject* obj1, PhysicsObject* obj2)
 {
+	Sphere *sphere = dynamic_cast<Sphere*>(obj1);
+	AABB *aabb = dynamic_cast<AABB*>(obj2);
+
+	if (sphere != nullptr && aabb != nullptr)
+	{
+		// clamp circles centre to be between aabb's min and max corners
+		glm::vec2 clampedVal = glm::clamp(sphere->getPosition(), aabb->min(), aabb->max());
+		
+		// test to see the point overlaps with circle
+		glm::vec2 overlapVal = clampedVal - sphere->getPosition();
+		float result = glm::dot(overlapVal, overlapVal);
+
+		if (result < sphere->getRadius())
+		{
+			sphere->resolveCollision(aabb);
+		}
+
+	}
+
 	return false;
 }
 
@@ -204,9 +223,9 @@ bool PhysicsScene::aabb2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 	return false;
 }
 
-bool PhysicsScene::aabb2Sphere(PhysicsObject *, PhysicsObject *)
+bool PhysicsScene::aabb2Sphere(PhysicsObject *obj1, PhysicsObject *obj2)
 {
-	return false;
+	return sphere2AABB(obj2, obj1);
 }
 
 bool PhysicsScene::aabb2AABB(PhysicsObject* obj1, PhysicsObject* obj2)

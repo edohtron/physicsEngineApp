@@ -10,14 +10,14 @@ public:
 	~Rigidbody();
 
 	virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
-	virtual void debug()override; //define?
+	virtual void debug()override; 
 	void applyForce(glm::vec2 force);
 	void applyForceToActor(Rigidbody* actor2, glm::vec2 force);
 	void setVelocity(glm::vec2 vel);
 
 	void resolveCollision(Rigidbody * actor2);
 
-	virtual bool checkCollision(PhysicsObject* pOther) = 0; //define?
+	virtual bool checkCollision(PhysicsObject* pOther) = 0; 
 
 	glm::vec2 getPosition() { return m_position; }
 	float getRotation() { return m_rotation; }
