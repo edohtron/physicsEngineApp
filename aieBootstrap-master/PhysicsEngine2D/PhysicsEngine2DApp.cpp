@@ -20,33 +20,33 @@ bool PhysicsEngine2DApp::startup() {
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
 	m_physicsScene = new PhysicsScene();
-	m_physicsScene->setGravity(glm::vec2(0, -15));
+	m_physicsScene->setGravity(glm::vec2(0, -10));
 	m_physicsScene->setTimeStep(0.01f);
 	
 
-	Sphere* ball1 = new Sphere(glm::vec2(50, 7), glm::vec2(0, 0), 17.0f, 5, glm::vec4(1, 0, 0, 1));
+	Sphere* ball1 = new Sphere(glm::vec2(25, 0), glm::vec2(0, 0), 17.0f, 5, glm::vec4(1, 0, 0, 1));
 	Sphere* ball2 = new Sphere(glm::vec2(-25, 0), glm::vec2(0, 0), 16.0f, 5, glm::vec4(0, 1, 0, 1));
-	AABB*	sq1 = new AABB(glm::vec2(0, 0), glm::vec2(0, 0), 5.0f, glm::vec2(5, 5), glm::vec4(1, 0, 0, 1));
-	AABB*	sq2 = new AABB(glm::vec2(0, 35), glm::vec2(0, 0), 6.0f, glm::vec2(9, 9), glm::vec4(0, 1, 0, 1));
-	Plane* plane1 = new Plane(glm::vec2(0, 1), -50); //bottom plane
-	Plane* plane2 = new Plane(glm::vec2(1, 0), -95); //left plane
-	Plane* plane3 = new Plane(glm::vec2(0, -1), -50); //top plane
-	Plane* plane4 = new Plane(glm::vec2(-1, 0), -95); //right plane
+	AABB*	sq1 = new AABB(glm::vec2(-30, -30), glm::vec2(0, 0), 5.0f, glm::vec2(5, 5), glm::vec4(1, 0, 0, 1));
+	AABB*	sq2 = new AABB(glm::vec2(0, 15), glm::vec2(0, 0), 6.0f, glm::vec2(9, 9), glm::vec4(0, 1, 0, 1));
+	Plane* plane1 = new Plane(glm::vec2(0, 1), -40); //bottom plane
+	Plane* plane2 = new Plane(glm::vec2(1, 0), -80); //left plane
+	Plane* plane3 = new Plane(glm::vec2(0, -1), -40); //top plane
+	Plane* plane4 = new Plane(glm::vec2(-1, 0), -80); //right plane
 
 	//SIMULATE COLLISION
-	m_physicsScene->addActor(sq1);
-	m_physicsScene->addActor(sq2);
 	m_physicsScene->addActor(ball1);
 	m_physicsScene->addActor(ball2);
+	m_physicsScene->addActor(sq1);
+	m_physicsScene->addActor(sq2);
 	m_physicsScene->addActor(plane1);
 	m_physicsScene->addActor(plane2);
 	m_physicsScene->addActor(plane3);
 	m_physicsScene->addActor(plane4);
 
-	sq2->applyForce(glm::vec2(0, 0));
 	sq1->applyForce(glm::vec2(-150, 500));
-	ball1->applyForce(glm::vec2(-400, 0));
-	ball2->applyForce(glm::vec2(400, 0));
+	sq2->applyForce(glm::vec2(250, 0));
+	ball1->applyForce(glm::vec2(-1000, 0));
+	ball2->applyForce(glm::vec2(1000, 0));
 
 	
 	return true;
@@ -71,7 +71,6 @@ void PhysicsEngine2DApp::update(float deltaTime) {
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
-
 
 }
 

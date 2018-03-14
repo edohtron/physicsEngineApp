@@ -127,15 +127,16 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 			plane->getNormal()) - plane->getDistance();
 
 		//if behind plane then flip normal
-		if (sphereToPlane < 0)
+		if (sphereToPlane <= 0)
 		{
 			collisionNormal *= -1;
 			sphereToPlane *= -1;
 		}
 
 		float intersection = sphere->getRadius() - sphereToPlane;
-		if (intersection > 0)
+		if (intersection >= 0)
 		{
+			//sphere->setVelocity(glm::vec2(0,0));
 			plane->resolveCollision(sphere);
 			return true;
 		}
@@ -214,7 +215,7 @@ bool PhysicsScene::aabb2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 		}
 		else getOverlap = overlap1;
 
-		if (getOverlap < 0)
+		if (getOverlap <= 0)
 		{
 			plane->resolveCollision(aabb);
 		}

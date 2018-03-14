@@ -40,6 +40,7 @@ void Plane::resetPosition()
 
 void Plane::resolveCollision(Rigidbody * actor2)
 {
+
 	//APPLY calculated impulse to sphere
 	//RELATIVE velocities of sphere,
 	//COLLISION normal is planes normal
@@ -50,6 +51,7 @@ void Plane::resolveCollision(Rigidbody * actor2)
 
 	//impulse to sphere
 	float j = glm::dot(relativeVelocity , m_normal);
+	if (j > 0) return;
 
 	glm::vec2 newVelocity = actor2->getVelocity() - (1 + elasticity) * j * m_normal;
 
